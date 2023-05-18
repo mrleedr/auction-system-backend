@@ -8,6 +8,8 @@ import { ItemsModule } from './items/items.module';
 import { BidsModule } from './bids/bids.module';
 import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { TransactionsModule } from './transactions/transactions.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     UsersModule,
     ItemsModule,
@@ -31,6 +33,12 @@ import { TransactionsModule } from './transactions/transactions.module';
     TransactionsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuthInterceptor,
+    },
+  ],
 })
 export class AppModule {}
