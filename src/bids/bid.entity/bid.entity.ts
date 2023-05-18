@@ -7,11 +7,11 @@ export class Bid {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'decimal' })
-  amount: number;
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  bidAmount: number;
 
   @Column({ type: 'datetime' })
-  time: Date;
+  bidTime: Date;
 
   @ManyToOne(() => User, (user) => user.bids)
   user: User;

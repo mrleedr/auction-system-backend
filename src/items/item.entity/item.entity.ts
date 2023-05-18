@@ -20,10 +20,16 @@ export class Item {
   startingPrice: number;
 
   @Column()
-  state: string;
+  state: 'DRAFT' | 'PUBLISHED';
 
   @Column({ type: 'datetime' })
   timeWindow: Date;
+
+  @Column({ default: null, type: 'datetime' })
+  created_at?: Date;
+
+  @Column({ default: null, type: 'datetime' })
+  updated_at?: Date;
 
   @ManyToOne(() => User, (user) => user.items)
   user: User;

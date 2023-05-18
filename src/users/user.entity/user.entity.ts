@@ -20,6 +20,12 @@ export class User {
   @Column()
   email: string;
 
+  @Column({ default: null, type: 'datetime' })
+  created_at?: Date;
+
+  @Column({ default: null, type: 'datetime' })
+  updated_at?: Date;
+
   @OneToMany(() => Transaction, (transaction) => transaction.user)
   transactions: Transaction[];
 

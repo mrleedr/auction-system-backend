@@ -10,10 +10,10 @@ export class Transaction {
   amount: number;
 
   @Column({ type: 'datetime' })
-  time: Date;
+  transactionTime: Date;
 
   @Column()
-  type: string;
+  type: 'DEPOSIT' | 'BID';
 
   @ManyToOne(() => User, (user) => user.transactions)
   user: User;
