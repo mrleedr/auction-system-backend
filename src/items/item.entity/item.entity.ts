@@ -16,7 +16,7 @@ export class Item {
   @Column({ length: 200 })
   name: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'float' })
   startingPrice: number;
 
   @Column()

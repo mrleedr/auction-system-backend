@@ -16,7 +16,7 @@ import { IsEmail } from 'class-validator';
 @Unique(['email', 'username'])
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string | undefined;
+  id: string;
 
   @Column({ length: 200 })
   username: string;
@@ -24,7 +24,7 @@ export class User {
   @Column()
   password?: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'float' })
   balance?: number;
 
   @IsEmail()

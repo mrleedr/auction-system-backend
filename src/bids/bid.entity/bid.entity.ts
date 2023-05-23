@@ -7,7 +7,7 @@ export class Bid {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'float' })
   bidAmount: number;
 
   @Column({ type: 'datetime' })

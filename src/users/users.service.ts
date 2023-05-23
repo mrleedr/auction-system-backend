@@ -37,4 +37,27 @@ export class UsersService {
       .then((res) => res)
       .catch((e) => console.log(e));
   }
+
+  async profile(id: string) {
+    const { password, ...rest } = await this.usersRepository.findOne({
+      where: { id: id },
+    });
+
+    return rest;
+  }
+
+  async deposit(id: string, amount: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id: id },
+    });
+
+    user.balance += amount;
+
+    try {
+      return await this.usersRepository.save(user);
+    } catch (e) {
+      console.log(e);
+      throw new Error('Failed to update user balance');
+    }
+  }
 }
