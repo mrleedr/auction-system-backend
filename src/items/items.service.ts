@@ -17,6 +17,7 @@ export class ItemsService {
     const item = new Item();
     item.name = createItemDto.name;
     item.startingPrice = createItemDto.startingPrice;
+    item.highestBid = createItemDto.startingPrice;
     item.timeWindow = createItemDto.timeWindow;
     item.itemState = 'DRAFT';
     item.bidState = null;
@@ -44,5 +45,9 @@ export class ItemsService {
 
   async getOngoingItems(): Promise<Item[]> {
     return this.itemRepository.find({ where: { bidState: 'ONGOING' } });
+  }
+
+  async getItemById(id: number): Promise<Item> {
+    return this.itemRepository.findOne({ where: { id } });
   }
 }

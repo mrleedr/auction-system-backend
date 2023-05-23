@@ -21,6 +21,9 @@ export class Item {
   @Column({ type: 'float' })
   startingPrice: number;
 
+  @Column({ type: 'float', default: 0 })
+  highestBid: number;
+
   @Column()
   itemState: 'DRAFT' | 'PUBLISHED';
 
