@@ -4,6 +4,8 @@ import {
   ManyToOne,
   OneToMany,
   Entity,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/user.entity/user.entity';
 import { Bid } from '../../bids/bid.entity/bid.entity';
@@ -20,16 +22,19 @@ export class Item {
   startingPrice: number;
 
   @Column()
-  state: 'DRAFT' | 'PUBLISHED';
+  itemState: 'DRAFT' | 'PUBLISHED';
 
-  @Column({ type: 'datetime' })
-  timeWindow: Date;
+  @Column({ default: null, nullable: true })
+  bidState?: 'ONGOING' | 'COMPLETED' | null;
 
-  @Column({ default: null, type: 'datetime' })
-  created_at?: Date;
+  @Column({ type: 'int' })
+  timeWindow: number;
 
-  @Column({ default: null, type: 'datetime' })
-  updated_at?: Date;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 
   @ManyToOne(() => User, (user) => user.items)
   user: User;
